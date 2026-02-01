@@ -25,10 +25,14 @@ public class Property {
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private PropertyType type;
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private PropertyStatus status;
     @ElementCollection
     @CollectionTable(name = "property_services")
     private List<String> property_services;
     @ElementCollection
     @CollectionTable(name = "property_landmarks")
     private List<String> property_landmarks;
+    private String description;
 }
