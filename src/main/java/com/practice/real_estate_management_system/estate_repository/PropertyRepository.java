@@ -11,5 +11,4 @@ public interface PropertyRepository extends JpaRepository<Property, Long>  {
     public List<Property> findByOwnerName(String owner);
     public List<Property> findByStatus(PropertyStatus status);
     public List<Property> findByType(PropertyType type);
-
 }
