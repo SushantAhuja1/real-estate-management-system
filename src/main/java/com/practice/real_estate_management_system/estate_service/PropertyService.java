@@ -31,4 +31,10 @@ public class PropertyService {
         });
         return propertyDTOList;
     }
+
+    //find-property-by-id-function
+    public PropertyDTO getPropertyById(Long id) {
+        Property property = propertyRepository.findById(id).orElseThrow(()->new RuntimeException("Property with id "+id+" not found"));
+        return modelMapper.map(property,PropertyDTO.class);
+    }
 }
