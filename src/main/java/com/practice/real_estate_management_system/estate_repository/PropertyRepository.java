@@ -8,7 +8,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 public interface PropertyRepository extends JpaRepository<Property, Long>  {
-    public List<Property> findByOwner(String owner);
+    public List<Property> findByOwnerName(String owner);
     public List<Property> findByStatus(PropertyStatus status);
     public List<Property> findByType(PropertyType type);
 
