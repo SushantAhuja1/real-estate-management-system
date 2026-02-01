@@ -6,6 +6,9 @@ import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class PropertyService {
@@ -17,5 +20,15 @@ public class PropertyService {
         Property property = modelMapper.map(propertyDTO, Property.class);
         property = propertyRepository.save(property);
         return modelMapper.map(property, PropertyDTO.class);
+    }
+
+    //list-all-properties-function
+    public List<PropertyDTO> getAllProperties() {
+        List<Property> propertyList = propertyRepository.findAll();
+        List<PropertyDTO> propertyDTOList = new ArrayList<>();
+        propertyList.forEach(property -> {
+            propertyDTOList.add(modelMapper.map(property,PropertyDTO.class));
+        });
+        return propertyDTOList;
     }
 }
