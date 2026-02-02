@@ -37,4 +37,11 @@ public class PropertyService {
         Property property = propertyRepository.findById(id).orElseThrow(()->new RuntimeException("Property with id "+id+" not found"));
         return modelMapper.map(property,PropertyDTO.class);
     }
+
+    //delete-property-by-id-function
+    public String deletePropertyById(Long id) {
+        Property property = propertyRepository.findById(id).orElseThrow(()->new RuntimeException("Property id "+id+" not found"));
+        propertyRepository.deleteById(id);
+        return "Property with id "+id+" deleted";
+    }
 }
