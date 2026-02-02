@@ -44,4 +44,12 @@ public class PropertyService {
         propertyRepository.deleteById(id);
         return "Property with id "+id+" deleted";
     }
+
+    //update-property-by-id-function
+    public PropertyDTO updatePropertyById(Long id,PropertyDTO propertyDTO) {
+        Property property = propertyRepository.findById(id).orElseThrow(()->new RuntimeException("Property with id "+id+" not found"));
+        modelMapper.map(propertyDTO,property);
+        property = propertyRepository.save(property);
+        return modelMapper.map(property,PropertyDTO.class);
+    }
 }
