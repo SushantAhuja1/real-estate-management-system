@@ -1,6 +1,8 @@
 package com.practice.real_estate_management_system.estate_controller;
 
 import com.practice.real_estate_management_system.entity_dto.PropertyDTO;
+import com.practice.real_estate_management_system.estate_entity.PropertyStatus;
+import com.practice.real_estate_management_system.estate_entity.PropertyType;
 import com.practice.real_estate_management_system.estate_service.PropertyService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -36,5 +38,20 @@ public class PropertyController {
     @PutMapping("/{id}")
     public PropertyDTO updatePropertyById(@PathVariable Long id,@ RequestBody PropertyDTO propertyDTO){
         return propertyService.updatePropertyById(id,propertyDTO);
+    }
+    //find-by-type-controller
+    @GetMapping("/type/{type}")
+    public List<PropertyDTO> getPropertyByType(@PathVariable PropertyType propertyType){
+        return propertyService.getAllPropertiesByPropertyType(propertyType);
+    }
+    //find-by-status-controller
+    @GetMapping("/status/{status}")
+    public List<PropertyDTO> getPropertyByStatus(@PathVariable PropertyStatus propertyStatus){
+        return propertyService.getAllPropertiesByPropertyStatus(propertyStatus);
+    }
+    //find-by-owner-name-controller
+    @GetMapping("/owner/{ownerName}")
+    public List<PropertyDTO> getPropertyByOwner(@PathVariable String ownerName){
+        return propertyService.getAllPropertiesByOwnerName(ownerName);
     }
 }
