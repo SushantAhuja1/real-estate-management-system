@@ -4,6 +4,7 @@ import com.practice.real_estate_management_system.estate_entity.Property;
 import com.practice.real_estate_management_system.estate_entity.PropertyStatus;
 import com.practice.real_estate_management_system.estate_entity.PropertyType;
 import com.practice.real_estate_management_system.estate_repository.PropertyRepository;
+import com.practice.real_estate_management_system.exceptions.PropertyNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
@@ -36,20 +37,20 @@ public class PropertyService {
 
     //find-property-by-id-function
     public PropertyDTO getPropertyById(Long id) {
-        Property property = propertyRepository.findById(id).orElseThrow(()->new RuntimeException("Property with id "+id+" not found"));
+        Property property = propertyRepository.findById(id).orElseThrow(()->new PropertyNotFoundException("Property with id "+id+" not found"));
         return modelMapper.map(property,PropertyDTO.class);
     }
 
     //delete-property-by-id-function
     public String deletePropertyById(Long id) {
-        Property property = propertyRepository.findById(id).orElseThrow(()->new RuntimeException("Property id "+id+" not found"));
+        Property property = propertyRepository.findById(id).orElseThrow(()->new PropertyNotFoundException("Property id "+id+" not found"));
         propertyRepository.deleteById(id);
         return "Property with id "+id+" deleted";
     }
 
     //update-property-by-id-function
     public PropertyDTO updatePropertyById(Long id,PropertyDTO propertyDTO) {
-        Property property = propertyRepository.findById(id).orElseThrow(()->new RuntimeException("Property with id "+id+" not found"));
+        Property property = propertyRepository.findById(id).orElseThrow(()->new PropertyNotFoundException("Property with id "+id+" not found"));
         modelMapper.map(propertyDTO,property);
         property = propertyRepository.save(property);
         return modelMapper.map(property,PropertyDTO.class);
